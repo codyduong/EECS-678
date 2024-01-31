@@ -1,0 +1,10 @@
+The current bug population of Earth is about: 1480000000000000000
+The current bug population of Mars is about: 0
+The current bug population of Venus is about: 0
+The total bug population of the solar system is: 1480000000000000000
+The most useless bug is a mosquito
+The most colorful bug is a butterfly
+The most colorful bug is a a is bug colorful most The 
+The current bug adjective is: (null)
+Bugs didn't cause me to crash!
+

@@ -17,14 +17,17 @@ void* possibly_lost;
 int main() {
   int uninitialized_variable; // This variable is never given a value.
 
-  for (; uninitialized_variable < 100; uninitialized_variable++) {
+  for (uninitialized_variable = 0; uninitialized_variable < 100; uninitialized_variable++) {
     void** definitely_lost = (void**) malloc(sizeof(void*)); // allocate a
                                                              // pointer on the
                                                              // heap.
 
     *definitely_lost = (void*) malloc(7); // Give the pointer something else to
                                           // point to on the heap. This will be
-                                          // indirectly lost.
+                                          // indirectly lost
+
+    free(*definitely_lost);
+    free(definitely_lost);
   }
 
   // At this point, definitely_lost is out of scope and we can no longer free
@@ -41,5 +44,10 @@ int main() {
                       // very odd behavior and usually is a memory leak (but not
                       // always).
 
+  free(still_reachable);
+  // we have to get the front
+  possibly_lost -= 4;
+  free(possibly_lost);
+  
   return 0;
 }

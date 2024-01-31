@@ -35,7 +35,7 @@
 struct Storage {
   intptr_t num_bugs_on_mars;
   const char* scary_bug;
-  char* sentence[6]; // It might be necessary to grow this array.
+  char* sentence[7]; // It might be necessary to grow this array.
   const char* colorful_bug;
   intptr_t num_bugs_on_earth;
   intptr_t num_bugs_on_venus;
@@ -65,7 +65,7 @@ void echoohce(char** strs) {
 
   // FIXME: Something is wrong in this for loop. It is printing garbage characters.
   for (iter = strs; *iter != NULL; ++iter)
-    printf("%s ", iter);
+    printf("%s ", *iter);
 
   fflush(stdout);
 
@@ -75,7 +75,7 @@ void echoohce(char** strs) {
   // FIXME: Do the same thing only backwards. The array has a NULL pointer at
   // the front, right? Nope. Both sides of the condition in the for loop are
   // wrong.
-  for (; *iter != NULL; --iter)
+  for (; iter > stop_beginning &&  *iter != NULL; --iter)
     printf("%s ", *iter);
 
   printf("\n");
@@ -87,9 +87,10 @@ int main(int argc, char** argv) {
 
   // Initialize structure
   bug_info.num_bugs_on_earth = 7400000000 * 200000000;
+  bug_info.num_bugs_on_mars = 0;
   bug_info.num_bugs_on_venus = 0;
   bug_info.colorful_bug = "butterfly";
-  bug_info.useless_bug = "mosquito";
+  bug_info.useless_bug = strdup("mosquito");
   bug_info.scary_bug = "~~~~~~~~ SPIDER!!! ~~~~~~~~";
 
   // Setup the sentence structure. Strdup uses malloc to allocate space for the
@@ -101,6 +102,7 @@ int main(int argc, char** argv) {
   bug_info.sentence[3] = strdup("bug");
   bug_info.sentence[4] = strdup("is");
   bug_info.sentence[5] = strdup("a");
+  bug_info.sentence[6] = NULL;
 
   // Print the current bug population on various planets
   printf("The current bug population of Earth is about: %zu\n",
@@ -109,9 +111,6 @@ int main(int argc, char** argv) {
          bug_info.num_bugs_on_mars);  // 0
   printf("The current bug population of Venus is about: %zu\n",
          bug_info.num_bugs_on_venus); // 0
-
-  // Initialize num_bugs_on_mars
-  bug_info.num_bugs_on_mars = 0;
 
   // Print the following line:
   // "The total bug population of the solar system is: 1480000000000000000"
@@ -123,6 +122,9 @@ int main(int argc, char** argv) {
   // Print "The most useless bug is a mosquito"
   echo(bug_info.sentence);
   printf("%s\n", bug_info.useless_bug);
+
+  // Freeing the duplicated string before changing it
+  free(bug_info.sentence[2]);
 
   // Change the adjective to something appropriate for butterflies
   bug_info.sentence[2] = strdup("colorful");
@@ -142,6 +144,9 @@ int main(int argc, char** argv) {
   free(bug_info.sentence[4]);
   free(bug_info.sentence[5]);
 
+  // The bug_info.sentence[2] is expected to be null
+  bug_info.sentence[2] = NULL;
+
   // Prints "The current bug adjective is: (null)"
   printf("The current bug adjective is: %s\n", bug_info.sentence[2]);
 
@@ -153,4 +158,5 @@ int main(int argc, char** argv) {
   printf("Bugs didn't cause me to crash!\n\n");
 
   return EXIT_SUCCESS;
+
 }
