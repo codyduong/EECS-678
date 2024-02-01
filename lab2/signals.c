@@ -77,13 +77,19 @@ int main(int argc, char* argv[])
   
   /* STEP - 4 (10 points) */
   /* ensure in the mask_set that the alarm signal does not get blocked while in another signal handler */
-  sigdelset(&mask_set, 14);
+  sigdelset(&mask_set, SIGALRM);
   
   /* STEP - 5 (20 points) */
   /* set signal handlers for SIGINT, SIGTSTP and SIGALRM */
-  signal(SIGINT, catch_int);
-  signal(SIGTSTP, catch_tstp);
-  signal(SIGALRM, catch_alrm);
+  sa.sa_mask = mask_set;
+
+  sa.sa_handler = catch_int;
+  sigaction(SIGINT, &sa, NULL);
+  sa.sa_handler = catch_tstp;
+  sigaction(SIGTSTP, &sa, NULL);
+  sa.sa_handler = catch_alrm;
+  sigaction(SIGALRM, &sa, NULL);
+
 
   /* STEP - 6 (10 points) */
   /* ensure that the program keeps running to receive the signals */
