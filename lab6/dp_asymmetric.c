@@ -138,6 +138,7 @@ static void *dp_thread(void *arg)
      */
     think_rnd = (rand() % MAX_PHIL_THINK_PERIOD);
     eat_rnd   = (rand() % MAX_PHIL_EAT_PERIOD);
+    id        = me->id;
 
     /*
      * Think a random number of thoughts before getting hungry. this
@@ -152,8 +153,15 @@ static void *dp_thread(void *arg)
     /*
      * Grab both chopsticks: ASYMMETRIC and WAITER SOLUTION
      */
-    pthread_mutex_lock(left_chop(me));
-    pthread_mutex_lock(right_chop(me));
+    if (id == 0) {
+      // Philosopher 0 picks up right chopstick first
+      pthread_mutex_lock(right_chop(me));
+      pthread_mutex_lock(left_chop(me));
+    } else {
+      // All other philosophers pick up left chopstick first
+      pthread_mutex_lock(left_chop(me));
+      pthread_mutex_lock(right_chop(me));
+    }
 
     /*
      * Eat some random amount of food. Again, this involves a
