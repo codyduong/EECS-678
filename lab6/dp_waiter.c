@@ -158,9 +158,9 @@ static void *dp_thread(void *arg)
     }
     *left_chop_available(me) = 0;
     *right_chop_available(me) = 0;
+    pthread_mutex_unlock(&waiter);
     pthread_mutex_lock(left_chop(me));
     pthread_mutex_lock(right_chop(me));
-    pthread_mutex_unlock(&waiter);
 
     /*
      * Eat some random amount of food. Again, this involves a
@@ -179,9 +179,9 @@ static void *dp_thread(void *arg)
     pthread_mutex_lock(&waiter);
     *left_chop_available(me) = 1;
     *right_chop_available(me) = 1;
-
-    pthread_cond_signal(&left_phil(me)->can_eat);
-    pthread_cond_signal(&right_phil(me)->can_eat);
+    pthread_cond_broadcast(&left_phil(me)->can_eat);
+    pthread_cond_broadcast(&right_phil(me)->can_eat);
+    pthread_mutex_unlock(&waiter);
 
     /* 
      * Update my progress in current session and for all time.

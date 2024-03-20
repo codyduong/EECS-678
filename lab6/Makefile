@@ -8,7 +8,7 @@ CFILELIST = dining_philosophers.c dp_asymmetric.c dp_waiter.c
 
 RAWC = $(patsubst %.c,%,$(addprefix $(SRCDIR), $(CFILELIST)))
 
-all: dp # dp_asymmetric dp_waiter
+all: dp dp_asymmetric dp_waiter
 
 dp: dining_philosophers.c
 	gcc -g dining_philosophers.c -lpthread -lm -o dp
@@ -22,7 +22,7 @@ dp_waiter: dp_waiter.c
 # Add the dp_asymmetric_test and dp_waiter_test targets to test as you implement
 # them
 
-test: dp_test dp_asymmetric_test #dp_waiter_test
+test: dp_test dp_asymmetric_test dp_waiter_test
 
 dp_test: dp
 	./dp
