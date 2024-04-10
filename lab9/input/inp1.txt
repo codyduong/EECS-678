@@ -1,0 +1,7 @@
+Logical address space size: 2^32
+Physical address space size: 2^32
+Page size: 2^31
+0xd6334873
+0x74b0dc51
+0xa9495cff
+0x2ae8944a
