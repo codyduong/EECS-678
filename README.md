@@ -1,4 +1,4 @@
-# EECS-678 | Introduction to Operating Systems
+# EECS 678 - Introduction to Operating Systems
 
 Taken with [Dr. Heechul Yun](https://web.archive.org/web/https://www.ittc.ku.edu/~heechul/) in Spring 2024.
 
@@ -9,9 +9,6 @@ All lab instructions are viewable online at [https://zarrar1607.github.io/KUEECS
 Alternatively all lab instructions have been archived at [`web.archive.org`](https://web.archive.org/web/20240410204517/https://zarrar1607.github.io/KUEECS678-Spring2024/).
 
 ## Grades
-> [!TIP]
-> Please double check your own requirements, this class was taken in *SPRING 2024*
-
 > [!CAUTION]
 > Lab 8 has mistakes and errors!
 
