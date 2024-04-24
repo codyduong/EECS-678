@@ -244,8 +244,7 @@ int check_for_deadlock()
      * also need to determine how many fields to skip over - see proc(5)
      * HINT: Use the the * qualifier to skip tokens without storing them.
      */
-    // 3fscanf(statf, "%*d (%*[^)]) %c", &state);
-    for (j = 3; j < FIELDS_TO_IGNORE; j++) {
+    for (j = 0; j < FIELDS_TO_IGNORE; j++) {
       fscanf(statf, "%*s");
     }
     
@@ -270,7 +269,7 @@ int check_for_deadlock()
      */
     fclose(statf);
   }
-  
+
   return deadlock;
 }
 
