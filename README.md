@@ -11,7 +11,7 @@ Alternatively all lab instructions have been archived at [`web.archive.org`](htt
 ## Grades
 
 > [!CAUTION]
-> Lab 8 has mistakes and errors!
+> Lab 8 has mistakes and errors! Consider checking out [cyrusduong/EECS678_Scheduler_Proj2](https://github.com/cyrusduong/EECS678_Scheduler_Proj2)
 
 > [!NOTE]
 > Lab 12 was not complete, it was an extra credit lab
